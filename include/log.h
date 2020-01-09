@@ -19,6 +19,8 @@
 
 #else
 
+#include <stdio.h>
+
 #define log(format, args...) { \
     printf(format, ##args); \
 }
@@ -28,7 +30,7 @@
 }
 
 #define log_e(format, args...) { \
-    fsprintf(stderr, format, ##args); \
+    fprintf(stderr, format, ##args); \
 }
 
 #endif
