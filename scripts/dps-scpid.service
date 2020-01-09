@@ -1,0 +1,17 @@
+[Unit]
+Description=SCPI daemon
+After=network.target
+
+[Service]
+;User=dps
+;Group=dps
+ExecStart=/usr/bin/dps-scpid
+TimeoutSec=60s
+WatchdogSec=20s
+Restart=on-failure
+RestartSec=10s
+NotifyAccess=main
+ProtectSystem=full
+
+[Install]
+WantedBy=multi-user.target
