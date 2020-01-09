@@ -3,8 +3,8 @@ Description=SCPI daemon
 After=network.target
 
 [Service]
-;User=dps
-;Group=dps
+User=dps
+Group=dps
 ExecStart=/usr/bin/dps-scpid
 TimeoutSec=60s
 WatchdogSec=20s
