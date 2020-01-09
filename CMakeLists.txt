@@ -11,13 +11,7 @@ find_package(PkgConfig REQUIRED)
 
 pkg_check_modules(SYSTEMD libsystemd)
 include_directories(${SYSTEMD_INCLUDE_DIRS})
-if (SYSTEMD_FOUND AND "${SYSTEMD_SERVICES_INSTALL_DIR}" STREQUAL "")
-	execute_process(COMMAND ${PKG_CONFIG_EXECUTABLE}
-		--variable=systemdsystemunitdir systemd
-		OUTPUT_VARIABLE SYSTEMD_SERVICES_INSTALL_DIR)
-	string(REGEX REPLACE "[ \t\n]+" "" SYSTEMD_SERVICES_INSTALL_DIR
-		"${SYSTEMD_SERVICES_INSTALL_DIR}")
-endif ()
+set(SYSTEMD_UNIT_DIR /lib/systemd/system/)
 
 pkg_check_modules(SCPI REQUIRED scpi)
 include_directories(${SCPI_INCLUDE_DIRS})
@@ -48,5 +42,5 @@ install (TARGETS dps-scpid DESTINATION /usr/bin/)
 
 if (WITH_SYSTEMD)
 	install (FILES ${CMAKE_SOURCE_DIR}/scripts/dps-scpid.service
-	DESTINATION ${SYSTEMD_SERVICES_INSTALL_DIR}/)
+		DESTINATION ${SYSTEMD_UNIT_DIR}/)
 endif (WITH_SYSTEMD)
